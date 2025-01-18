@@ -27,4 +27,6 @@ class UnitManager {
   static const double LINE_WIDTH = 1.0;
   //for border width
   static const double BORDER_WIDTH = 1.0;
+  //for primary button icon
+  static const double PRIMARY_BUTTON_ICON_SIZE = 40.0;
 }

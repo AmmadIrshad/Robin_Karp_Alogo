@@ -25,4 +25,6 @@ class TextManager {
   //for preview screen
   static const String CROP_BUTTON = 'Crop';
   static const String CONVERT_BUTTON = 'Convert';
+  //for internet connection lost
+  static const String LOST_CONNECTION = 'Oops, Tidak Ada Koneksi Internet';
 }

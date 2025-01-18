@@ -5,6 +5,7 @@ import 'package:flutter_robin_karp_algorithm_app/controller/cropper_controller.d
 import 'package:flutter_robin_karp_algorithm_app/controller/home_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/preview_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/splash_controller.dart';
+import 'package:flutter_robin_karp_algorithm_app/resources/color_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +46,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: ColorManager.PRIMARY_COLOR,
+      ),
       home: const SplashScreen(),
     );
   }
