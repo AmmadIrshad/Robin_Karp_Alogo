@@ -35,6 +35,7 @@ class NoInternetState extends StatelessWidget {
           MyButton(
             isPrimaryButton: false,
             isCropButton: false,
+            isCompare: false,
             needElevation: true,
             width: 99.0,
             height: 30.0,

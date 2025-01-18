@@ -6,7 +6,7 @@ class TextManager {
   static const String HOME_TAKE_PICTURE_BUTTON = 'Ambil gambar';
   static const String HOME_COMPARE_BUTTON = 'Compare';
   static const String HOME_EXPLANATION =
-      'COmpare teks hasil konversi dengan teks penguji untuk melihat akurasi hasil konversi';
+      'Compare teks hasil konversi dengan teks penguji untuk melihat akurasi hasil konversi';
   static const String CONVERT_TEXT_BOX_TITLE = 'Hasil Konversi';
   static const String TESTER_TEXT_BOX_TITLE = 'Teks Penguji';
   static const String CONVERT_TEXT_BOX_HINT =

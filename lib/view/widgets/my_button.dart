@@ -11,6 +11,7 @@ class MyButton extends StatelessWidget {
   final FontWeight fontWeight;
   final bool isPrimaryButton;
   final bool isCropButton;
+  final bool isCompare;
   final double width;
   final double height;
   final void Function()? onPressed;
@@ -21,6 +22,7 @@ class MyButton extends StatelessWidget {
     super.key,
     required this.isPrimaryButton,
     required this.isCropButton,
+    required this.isCompare,
     required this.needElevation,
     required this.width,
     required this.height,
@@ -46,6 +48,9 @@ class MyButton extends StatelessWidget {
         backgroundColor: WidgetStatePropertyAll(
           isPrimaryButton || isCropButton
               ? ColorManager.SECONDARY_COLOR
+              : isCompare
+                  ? ColorManager.WHITE
+                  : ColorManager.PRIMARY_COLOR,
               : ColorManager.PRIMARY_COLOR,
         ),
         side: isCropButton
@@ -56,7 +61,10 @@ class MyButton extends StatelessWidget {
                 ),
               )
             : null,
-        elevation: needElevation ? const WidgetStatePropertyAll(2) : null,
+        fixedSize: WidgetStatePropertyAll(
+          Size(width, height),
+        ),
+        elevation: needElevation ? const WidgetStatePropertyAll(4) : null,
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
@@ -68,7 +76,11 @@ class MyButton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           isPrimaryButton
-              ? const Icon(Icons.photo_camera, size: UnitManager.PRIMARY_BUTTON_ICON_SIZE,)
+              ? const Icon(
+                  Icons.photo_camera,
+                  size: UnitManager.PRIMARY_BUTTON_ICON_SIZE,
+                  color: ColorManager.WHITE,
+                )
               : const SizedBox(),
           MyText(
             text: text,
