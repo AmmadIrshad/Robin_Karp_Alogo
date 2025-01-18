@@ -51,6 +51,7 @@ class MyButton extends StatelessWidget {
               : isCompare
                   ? ColorManager.WHITE
                   : ColorManager.PRIMARY_COLOR,
+              : ColorManager.PRIMARY_COLOR,
         ),
         side: isCropButton
             ? const WidgetStatePropertyAll(
