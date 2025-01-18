@@ -48,7 +48,7 @@ class _MyTextBoxState extends State<MyTextBox> {
             color: ColorManager.BLACK,
             textHierarchy: TextHierarchy.display,
             fontWeight: FontWeight.w700,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
           ),
           const Divider(
             color: ColorManager.BLACK,
@@ -60,7 +60,7 @@ class _MyTextBoxState extends State<MyTextBox> {
               color: ColorManager.SECONDARY_COLOR,
               textHierarchy: TextHierarchy.bodySmall,
               fontWeight: FontWeight.w400,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
           ),
         ],
