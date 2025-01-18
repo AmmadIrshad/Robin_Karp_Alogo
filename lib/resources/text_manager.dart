@@ -6,7 +6,7 @@ class TextManager {
   static const String HOME_TAKE_PICTURE_BUTTON = 'Ambil gambar';
   static const String HOME_COMPARE_BUTTON = 'Compare';
   static const String HOME_EXPLANATION =
-      'COmpare teks hasil konversi dengan teks penguji untuk melihat akurasi hasil konversi';
+      'Compare teks hasil konversi dengan teks penguji untuk melihat akurasi hasil konversi';
   static const String CONVERT_TEXT_BOX_TITLE = 'Hasil Konversi';
   static const String TESTER_TEXT_BOX_TITLE = 'Teks Penguji';
   static const String CONVERT_TEXT_BOX_HINT =
@@ -25,4 +25,6 @@ class TextManager {
   //for preview screen
   static const String CROP_BUTTON = 'Crop';
   static const String CONVERT_BUTTON = 'Convert';
+  //for internet connection lost
+  static const String LOST_CONNECTION = 'Oops, Tidak Ada Koneksi Internet';
 }

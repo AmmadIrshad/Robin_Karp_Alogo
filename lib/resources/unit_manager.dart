@@ -24,7 +24,9 @@ class UnitManager {
   static const double TEXT_BOX_VERTICAL_PADDING = 24.0;
   static const double TEXT_BOX_HORIZONTAL_PADDING = 32.0;
   //for line or divider width
-  static const double LINE_WIDTH = 1.0;
+  static const double LINE_HEIGHT = 1.0;
   //for border width
   static const double BORDER_WIDTH = 1.0;
+  //for primary button icon
+  static const double PRIMARY_BUTTON_ICON_SIZE = 40.0;
 }
