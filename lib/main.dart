@@ -3,6 +3,7 @@ import 'package:flutter_robin_karp_algorithm_app/controller/about_controller.dar
 import 'package:flutter_robin_karp_algorithm_app/controller/camera_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/cropper_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/home_controller.dart';
+import 'package:flutter_robin_karp_algorithm_app/controller/preview_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/splash_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => CropperController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PreviewController(),
         ),
       ],
       child: const MyApp(),
