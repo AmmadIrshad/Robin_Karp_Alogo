@@ -5,6 +5,7 @@ import 'package:flutter_robin_karp_algorithm_app/resources/unit_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/size_config.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/spacer.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/text_hierarchy.dart';
+import 'package:flutter_robin_karp_algorithm_app/view/camera/camera_screen.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_bottom_navigation_bar.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_button.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text.dart';
@@ -80,7 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: ColorManager.BLACK,
                       textHierarchy: TextHierarchy.bodySmall,
                       fontWeight: FontWeight.w500,
-                      onPressed: () {},
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CameraScreen(),
+                        ),
+                      ),
                     ),
                     23.0.vSpace,
                     const MyTextBox(

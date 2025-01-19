@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/about_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/camera_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/cropper_controller.dart';
@@ -11,30 +12,34 @@ import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => SplashController(),
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (_) {
+      runApp(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => SplashController(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => HomeController(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => AboutController(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => ThisCameraController(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => CropperController(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => PreviewController(),
+            ),
+          ],
+          child: const MyApp(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => HomeController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => AboutController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CameraController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CropperController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => PreviewController(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
+      );
+    },
   );
 }
 

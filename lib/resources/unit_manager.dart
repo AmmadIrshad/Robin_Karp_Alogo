@@ -29,4 +29,7 @@ class UnitManager {
   static const double BORDER_WIDTH = 1.0;
   //for primary button icon
   static const double PRIMARY_BUTTON_ICON_SIZE = 40.0;
+  //for camera related button
+  static const double CAPTURE_BUTTON_SIZE = 70.0;
+  static const double CAPTURE_BUTTON_BORDER_WIDTH = 10.0;
 }
