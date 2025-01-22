@@ -25,6 +25,9 @@ class TextManager {
   //for preview screen
   static const String CROP_BUTTON = 'Crop';
   static const String CONVERT_BUTTON = 'Convert';
+  static const String PREVIEW_TITLE = 'Image Preview';
   //for internet connection lost
   static const String LOST_CONNECTION = 'Oops, Tidak Ada Koneksi Internet';
+  //for cropper screen
+  static const String CROPPER_TITLE = 'Cropper';
 }

@@ -54,13 +54,15 @@ class _MyTextBoxState extends State<MyTextBox> {
             color: ColorManager.BLACK,
             height: UnitManager.LINE_HEIGHT,
           ),
-          SingleChildScrollView(
-            child: MyText(
-              text: widget.text,
-              color: ColorManager.SECONDARY_COLOR,
-              textHierarchy: TextHierarchy.bodySmall,
-              fontWeight: FontWeight.w400,
-              textAlign: TextAlign.start,
+          Expanded(
+            child: SingleChildScrollView(
+              child: MyText(
+                text: widget.text,
+                color: ColorManager.SECONDARY_COLOR,
+                textHierarchy: TextHierarchy.bodySmall,
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.start,
+              ),
             ),
           ),
         ],
