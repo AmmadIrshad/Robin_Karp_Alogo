@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_robin_karp_algorithm_app/controller/camera_controller.dart';
+import 'package:flutter_robin_karp_algorithm_app/controller/home_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/camera_related_button_type.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/size_config.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/camera/widgets/camera_related_button.dart';
-import 'package:flutter_robin_karp_algorithm_app/view/home/home_screen.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/preview/preview_screen.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/states/loading_state.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +17,7 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  late final ThisCameraController _provider;
+  late final HomeController _provider;
   bool _isFlashOn = false;
   //this is the instance of Camera Controller from camera package
   CameraController? _cameraController;
@@ -38,7 +36,7 @@ class _CameraScreenState extends State<CameraScreen> {
   ///this function also check whether the value of camera controller variable is error or not
   ///
   ///created on January 19th, 2025
-  Future _initCamera({required CameraDescription cameraDescription}) async {
+  _initCamera({required CameraDescription cameraDescription}) async {
     if (_cameraController != null) {
       await _cameraController!.dispose();
     }
@@ -80,7 +78,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
   @override
   void initState() {
-    _provider = Provider.of<ThisCameraController>(context, listen: false);
+    _provider = Provider.of<HomeController>(context, listen: false);
     availableCameras().then(
       (value) {
         _cameras = value;
@@ -125,7 +123,7 @@ class _CameraScreenState extends State<CameraScreen> {
             SizedBox(
               width: SizeConfig.screenWidth,
               height: SizeConfig.screenHeight,
-              child: capturePreview(),
+              child: buildCameraPreview(),
             ),
             CameraRelatedButton(
               cameraRelatedButtonType: CameraRelatedButtonType.close,
@@ -145,23 +143,26 @@ class _CameraScreenState extends State<CameraScreen> {
                 try {
                   final XFile imageFile =
                       await _cameraController!.takePicture();
-                  _provider.setImageFile(File(imageFile.path));
                   !_isFlashOn;
                   _cameraController!.setFlashMode(FlashMode.off);
+                  _provider.setImageFile(File(imageFile.path));
                   if (context.mounted) {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const PreviewScreen(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PreviewScreen(),
+                      ),
+                    );
                   }
                 } catch (e) {
                   if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      backgroundColor: Colors.red,
-                      content: Text(e.toString()),
-                    ));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.red,
+                        content: Text(e.toString()),
+                      ),
+                    );
                   }
                 }
               },
@@ -184,7 +185,7 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  Widget capturePreview() {
+  Widget buildCameraPreview() {
     if (_cameraController == null || !_cameraController!.value.isInitialized) {
       return const LoadingState();
     }

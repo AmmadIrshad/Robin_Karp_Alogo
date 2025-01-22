@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_robin_karp_algorithm_app/controller/home_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/color_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/text_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/unit_manager.dart';
+import 'package:flutter_robin_karp_algorithm_app/utils/finite_state.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/size_config.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/spacer.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/text_hierarchy.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_bottom_navigati
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_button.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text_box.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,6 +22,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final HomeController _provider;
+
+  @override
+  void initState() {
+    _provider = Provider.of<HomeController>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        _provider.getConvertResult();
+      },
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -89,9 +105,26 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     23.0.vSpace,
-                    const MyTextBox(
-                      title: TextManager.CONVERT_TEXT_BOX_TITLE,
-                      text: TextManager.CONVERT_TEXT_BOX_HINT,
+                    Consumer<HomeController>(
+                      builder: (context, value, child) {
+                        if (value.finiteState == FiniteState.loading) {
+                        } else if (value.finiteState == FiniteState.succeed) {
+                          return MyTextBox(
+                            title: TextManager.CONVERT_TEXT_BOX_TITLE,
+                            text: value.convertResult == null ||
+                                    value.convertResult!.text == ''
+                                ? TextManager.CONVERT_TEXT_BOX_HINT
+                                : value.convertResult!.text!,
+                          );
+                        } else if (value.finiteState == FiniteState.failed) {
+                        } else {
+                          return const SizedBox();
+                        }
+                        return const MyTextBox(
+                          title: TextManager.CONVERT_TEXT_BOX_TITLE,
+                          text: TextManager.CONVERT_TEXT_BOX_HINT,
+                        );
+                      },
                     ),
                     21.0.vSpace,
                     const MyTextBox(
