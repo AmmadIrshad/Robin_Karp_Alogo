@@ -4,6 +4,7 @@ import 'package:flutter_robin_karp_algorithm_app/resources/color_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/text_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/unit_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/finite_state.dart';
+import 'package:flutter_robin_karp_algorithm_app/utils/robin_karp_algorithm.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/size_config.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/spacer.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/text_hierarchy.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_bottom_navigati
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_button.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text_box.dart';
+import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text_field.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,14 +25,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final HomeController _provider;
+  final TextEditingController _testerController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FocusNode _testerNode = FocusNode();
+  double _result = 0;
 
   @override
   void initState() {
     _provider = Provider.of<HomeController>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) {
-        _provider.getConvertResult();
-      },
+      (timeStamp) {},
     );
     super.initState();
   }
@@ -111,25 +115,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         } else if (value.finiteState == FiniteState.succeed) {
                           return MyTextBox(
                             title: TextManager.CONVERT_TEXT_BOX_TITLE,
-                            text: value.convertResult == null ||
-                                    value.convertResult!.text == ''
+                            text: value.convertResult == null
                                 ? TextManager.CONVERT_TEXT_BOX_HINT
                                 : value.convertResult!.text!,
+                            color: ColorManager.BLACK,
                           );
                         } else if (value.finiteState == FiniteState.failed) {
                         } else {
-                          return const SizedBox();
+                          return const MyTextBox(
+                            title: TextManager.CONVERT_TEXT_BOX_TITLE,
+                            text: TextManager.CONVERT_TEXT_BOX_HINT,
+                            color: ColorManager.SECONDARY_COLOR,
+                          );
                         }
                         return const MyTextBox(
                           title: TextManager.CONVERT_TEXT_BOX_TITLE,
                           text: TextManager.CONVERT_TEXT_BOX_HINT,
+                          color: ColorManager.SECONDARY_COLOR,
                         );
                       },
                     ),
                     21.0.vSpace,
-                    const MyTextBox(
-                      title: TextManager.TESTER_TEXT_BOX_TITLE,
-                      text: TextManager.TESTER_TEXT_BOX_HINT,
+                    Form(
+                      key: _formKey,
+                      child: MyTextField(
+                        title: TextManager.TESTER_TEXT_BOX_TITLE,
+                        hint: TextManager.TESTER_TEXT_BOX_HINT,
+                        controller: _testerController,
+                        currentFocus: _testerNode,
+                      ),
                     ),
                     21.0.vSpace,
                     const MyText(
@@ -152,7 +166,98 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: ColorManager.BLACK,
                       textHierarchy: TextHierarchy.bodyMedium,
                       fontWeight: FontWeight.w500,
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (_provider.convertResult == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.red,
+                                content: MyText(
+                                    text: 'Hasil konversi masih kosong',
+                                    color: ColorManager.WHITE,
+                                    textHierarchy: TextHierarchy.bodyLarge,
+                                    fontWeight: FontWeight.normal,
+                                    textAlign: TextAlign.start),
+                              ),
+                            );
+                          } else {
+                            _result = RobinKarpAlgorithm.rabinKarpSimilarity(
+                              conversionText: _provider.convertResult!.text!,
+                              testerText: _testerController.text,
+                            );
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) => SizedBox(
+                                width: double.infinity,
+                                child: Container(
+                                  padding: const EdgeInsets.all(17.0),
+                                  decoration: const BoxDecoration(
+                                    color: ColorManager.SECONDARY_COLOR,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(
+                                          UnitManager.RADIUS_LARGE),
+                                      topRight: Radius.circular(
+                                          UnitManager.RADIUS_LARGE),
+                                    ),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/text_me_up_bottom_sheet.png',
+                                          width: 41.0,
+                                          height: 38.0,
+                                        ),
+                                        13.0.vSpace,
+                                        const MyText(
+                                          text: 'Accuracy of Result',
+                                          color: ColorManager.BLACK,
+                                          textHierarchy: TextHierarchy.display,
+                                          fontWeight: FontWeight.bold,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        13.0.vSpace,
+                                        MyText(
+                                          text:
+                                              '${_result.toStringAsFixed(2)}%',
+                                          color: ColorManager.BLACK,
+                                          textHierarchy: TextHierarchy.header,
+                                          fontWeight: FontWeight.normal,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        29.0.vSpace,
+                                        MyButton(
+                                          isPrimaryButton: false,
+                                          isCropButton: false,
+                                          isCompare: false,
+                                          needElevation: false,
+                                          width: getProportionateScreenWidth(
+                                              88.74),
+                                          height: 50,
+                                          borderRadius:
+                                              UnitManager.RADIUS_EXTRA_SMALL,
+                                          text: 'Ok',
+                                          color: ColorManager.BLACK,
+                                          textHierarchy:
+                                              TextHierarchy.bodyLarge,
+                                          fontWeight: FontWeight.normal,
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                        }
+                      },
                     ),
                   ],
                 ),
