@@ -98,7 +98,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   textHierarchy: TextHierarchy.header,
                   fontWeight: FontWeight.w500,
                   onPressed: () {
-                    _provider.convertImageToText();
+                    _provider.getConvertResult();
                     Navigator.pushAndRemoveUntil(
                       context,
                       PageRouteBuilder(

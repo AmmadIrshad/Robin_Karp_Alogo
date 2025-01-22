@@ -109,7 +109,6 @@ class HomeController with ChangeNotifier {
   }
 
   Future<RecognizedText> convertImageToText() async {
-    _imagePath == null;
     final InputImage _inputImage = InputImage.fromFilePath(_imagePath!);
     final TextRecognizer _textRecognizer =
         TextRecognizer(script: TextRecognitionScript.latin);

@@ -5,21 +5,18 @@ import 'package:flutter_robin_karp_algorithm_app/utils/size_config.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/text_hierarchy.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text.dart';
 
-class MyTextBox extends StatefulWidget {
+class MyTextBox extends StatelessWidget {
   final String text;
   final String title;
+  final Color color;
 
   const MyTextBox({
     super.key,
     required this.title,
     required this.text,
+    required this.color,
   });
 
-  @override
-  State<MyTextBox> createState() => _MyTextBoxState();
-}
-
-class _MyTextBoxState extends State<MyTextBox> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -44,7 +41,7 @@ class _MyTextBoxState extends State<MyTextBox> {
         spacing: 8.0,
         children: <Widget>[
           MyText(
-            text: widget.title,
+            text: title,
             color: ColorManager.BLACK,
             textHierarchy: TextHierarchy.display,
             fontWeight: FontWeight.w700,
@@ -57,8 +54,8 @@ class _MyTextBoxState extends State<MyTextBox> {
           Expanded(
             child: SingleChildScrollView(
               child: MyText(
-                text: widget.text,
-                color: ColorManager.SECONDARY_COLOR,
+                text: text,
+                color: color,
                 textHierarchy: TextHierarchy.bodySmall,
                 fontWeight: FontWeight.w400,
                 textAlign: TextAlign.start,
