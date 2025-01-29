@@ -69,7 +69,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: getProportionateScreenWidth(42.73),
+              //spacing: getProportionateScreenWidth(42.73),
               children: <Widget>[
                 MyButton(
                   isPrimaryButton: false,

@@ -22,7 +22,7 @@ class NoInternetState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 24.0,
+          //spacing: 24.0,
           children: <Widget>[
             Image.asset(
               'assets/images/no_internet_connection.png',

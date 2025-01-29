@@ -45,7 +45,7 @@ class _MyTextFieldState extends State<MyTextField> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 8.0,
+        //spacing: 8.0,
         children: <Widget>[
           MyText(
             text: widget.title,
