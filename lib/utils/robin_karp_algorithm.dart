@@ -30,8 +30,8 @@ class RobinKarpAlgorithm {
     required String conversionText,
     required String testerText,
   }) {
-    //const int k = 3;
-    int k = testerText.length < 3 ? testerText.length : 3;
+    const int k = 3;
+    //int k = testerText.length < 3 ? testerText.length : 3;
     const int prime = 101;
 
     // Set to store hash values of substrings in conversionText
