@@ -64,6 +64,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   fontWeight: FontWeight.w700,
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 10),
                 const MyText(
                   text: TextManager.MADE_BY_NAME,
                   color: ColorManager.BLACK,

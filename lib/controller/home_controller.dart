@@ -107,6 +107,10 @@ class HomeController with ChangeNotifier {
       ],
     );
   }
+  //"Google ML Kit is used for OCR (text extraction).
+  // When a user selects an image, the app converts it into InputImage,
+  // then Google ML Kit processes it to extract text.
+  // The extracted text is stored and displayed on the screen."
 
   Future<RecognizedText> convertImageToText() async {
     final InputImage _inputImage = InputImage.fromFilePath(_imagePath!);

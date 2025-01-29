@@ -51,9 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             38.0.vSpace,
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
-              // spacing: 16.0,
+              //Spacing: 16.0,
               children: <Widget>[
                 Image.asset(
                   'assets/logo/text_me_up_logo.png',
