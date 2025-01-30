@@ -174,7 +174,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 behavior: SnackBarBehavior.floating,
                                 backgroundColor: Colors.red,
                                 content: MyText(
-                                    text: 'Hasil konversi masih kosong',
+                                    text:
+                                        'The conversion result is still empty',
                                     color: ColorManager.WHITE,
                                     textHierarchy: TextHierarchy.bodyLarge,
                                     fontWeight: FontWeight.normal,

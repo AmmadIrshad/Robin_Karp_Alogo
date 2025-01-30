@@ -91,7 +91,7 @@ class _CameraScreenState extends State<CameraScreen> {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.red,
-              content: Text('Tidak ada kamera'),
+              content: Text('No camera available.'),
             ));
           }
         }

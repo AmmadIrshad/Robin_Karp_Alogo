@@ -15,6 +15,9 @@ class TextManager {
 
   //for about screen
   static const String ABOUT_TITLE = 'Text Me Up';
+  static const String STRING_MATCHING_TITLE = "Naive String Matching";
+  static const String STRING_MATCHING_DESCRIPTION = "xyz";
+  static const String STRING_MATCHING_COMPARE_BUTTON = "Button";
   static const String VERSION = 'V.1.0';
   static const String DESCRIPTION =
       'An application for converting images to text and comparing the accuracy of two texts using the Rabin-Karp algorithm.';
