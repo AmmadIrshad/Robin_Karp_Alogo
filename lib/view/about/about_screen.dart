@@ -194,42 +194,6 @@ class _AboutScreenState extends State<AboutScreen> {
                       ),
                     ),
                     23.0.vSpace,
-                    // Consumer<HomeController>(
-                    //   builder: (context, value, child) {
-                    //     if (value.finiteState == FiniteState.loading) {
-                    //     } else if (value.finiteState == FiniteState.succeed) {
-                    //       return MyTextBox(
-                    //         title: TextManager.CONVERT_TEXT_BOX_TITLE,
-                    //         text: value.convertResult == null
-                    //             ? TextManager.CONVERT_TEXT_BOX_HINT
-                    //             : value.convertResult!.text!,
-                    //         color: ColorManager.BLACK,
-                    //       );
-                    //     } else if (value.finiteState == FiniteState.failed) {
-                    //     } else {
-                    //       return const MyTextBox(
-                    //         title: TextManager.CONVERT_TEXT_BOX_TITLE,
-                    //         text: TextManager.CONVERT_TEXT_BOX_HINT,
-                    //         color: ColorManager.SECONDARY_COLOR,
-                    //       );
-                    //     }
-                    //     return const MyTextBox(
-                    //       title: TextManager.CONVERT_TEXT_BOX_TITLE,
-                    //       text: TextManager.CONVERT_TEXT_BOX_HINT,
-                    //       color: ColorManager.SECONDARY_COLOR,
-                    //     );
-                    //   },
-                    // ),
-                    // Form(
-                    //   key: _formKeyConversionController,
-                    //   child: MyTextField(
-                    //     title: TextManager.CONVERT_TEXT_BOX_TITLE,
-                    //     hint: TextManager.CONVERT_TEXT_BOX_HINT,
-                    //     controller: _conversionController,
-                    //     currentFocus: _conversionNode,
-                    //   ),
-                    // ),
-
                     Consumer<HomeController>(
                       builder: (context, value, child) {
                         if (value.finiteState == FiniteState.succeed &&
@@ -250,7 +214,6 @@ class _AboutScreenState extends State<AboutScreen> {
                         }
                       },
                     ),
-
                     21.0.vSpace,
                     Form(
                       key: _formKey,
@@ -300,13 +263,6 @@ class _AboutScreenState extends State<AboutScreen> {
                               ),
                             );
                           } else {
-                            // _result = RobinKarpAlgorithm.rabinKarpSimilarity(
-                            //   conversionText: _provider.convertResult!.text!,
-                            //   testerText: _testerController.text,
-                            // );
-                            // Assuming _result is a double variable initialized to 0
-                            // Correcting the method call with proper arguments
-                            // Determine the text to search in
                             String textToSearchIn =
                                 _provider.convertResult?.text?.isNotEmpty ==
                                         true
@@ -314,27 +270,26 @@ class _AboutScreenState extends State<AboutScreen> {
                                     : _conversionController.text;
 
 // Perform string matching
-                            List<int> matches =
+                            // List<int> matches =
+                            //     StringMatchingAlgorithm.stringMatching(
+                            //   textToSearchIn, // The text to search in
+                            //   _testerController
+                            //       .text, // The pattern to search for
+                            // );
+
+                            // String resultText = matches.isNotEmpty
+                            //     ? 'Pattern found at positions: ${matches.join(', ')}'
+                            //     : 'No match found';
+                            Map<String, dynamic> result =
                                 StringMatchingAlgorithm.stringMatching(
-                              textToSearchIn, // The text to search in
-                              _testerController
-                                  .text, // The pattern to search for
-                            );
+                                    textToSearchIn, _testerController.text);
 
-                            String resultText = matches.isNotEmpty
-                                ? 'Pattern found at positions: ${matches.join(', ')}'
+                            String resultText = result["matchedIndices"]
+                                    .isNotEmpty
+                                ? 'Pattern found at positions: ${result["matchedIndices"].join(', ')}\n'
+                                    'Execution Time: ${result["executionTimeMs"]} ms\n'
+                                    'Comparisons: ${result["comparisons"]}'
                                 : 'No match found';
-                            // Now, use resultText to display in your widget:
-
-                            // Calculate similarity as the percentage of matching substrings
-                            // double similarity = (matches.length /
-                            //         (_provider.convertResult!.text!.length -
-                            //             _testerController.text.length +
-                            //             1)) *
-                            //     100;
-
-                            // // Assign the calculated similarity to _result
-                            // _result = similarity;
 
                             showModalBottomSheet(
                               context: context,
