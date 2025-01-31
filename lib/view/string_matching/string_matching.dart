@@ -1,86 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_robin_karp_algorithm_app/resources/color_manager.dart';
-// import 'package:flutter_robin_karp_algorithm_app/resources/text_manager.dart';
-// import 'package:flutter_robin_karp_algorithm_app/resources/unit_manager.dart';
-// import 'package:flutter_robin_karp_algorithm_app/utils/spacer.dart';
-// import 'package:flutter_robin_karp_algorithm_app/utils/text_hierarchy.dart';
-// import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_bottom_navigation_bar.dart';
-// import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text.dart';
-
-// class AboutScreen extends StatefulWidget {
-//   const AboutScreen({super.key});
-
-//   @override
-//   State<AboutScreen> createState() => _AboutScreenState();
-// }
-
-// class _AboutScreenState extends State<AboutScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       bottomNavigationBar: const MyBottomNavigationBar(currentIndex: 1),
-//       body: SafeArea(
-//         child: Padding(
-//           padding: const EdgeInsets.all(UnitManager.SCREEN_PADDING),
-//           child: Center(
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: <Widget>[
-//                 Image.asset(
-//                   'assets/logo/text_me_up_logo.png',
-//                   width: 164.0,
-//                   height: 154.0,
-//                 ),
-//                 20.0.vSpace,
-//                 const MyText(
-//                   text: TextManager.ABOUT_TITLE,
-//                   color: ColorManager.BLACK,
-//                   textHierarchy: TextHierarchy.display,
-//                   fontWeight: FontWeight.w700,
-//                   textAlign: TextAlign.center,
-//                 ),
-//                 20.0.vSpace,
-//                 const MyText(
-//                   text: TextManager.VERSION,
-//                   color: ColorManager.BLACK,
-//                   textHierarchy: TextHierarchy.bodyLarge,
-//                   fontWeight: FontWeight.w500,
-//                   textAlign: TextAlign.center,
-//                 ),
-//                 23.0.vSpace,
-//                 const MyText(
-//                   text: TextManager.DESCRIPTION,
-//                   color: ColorManager.BLACK,
-//                   textHierarchy: TextHierarchy.bodyLarge,
-//                   fontWeight: FontWeight.w400,
-//                   textAlign: TextAlign.center,
-//                 ),
-//                 36.0.vSpace,
-//                 const MyText(
-//                   text: TextManager.MADE_BY_LABEL,
-//                   color: ColorManager.BLACK,
-//                   textHierarchy: TextHierarchy.bodyLarge,
-//                   fontWeight: FontWeight.w700,
-//                   textAlign: TextAlign.center,
-//                 ),
-//                 const SizedBox(height: 10),
-//                 const MyText(
-//                   text: TextManager.MADE_BY_NAME,
-//                   color: ColorManager.BLACK,
-//                   textHierarchy: TextHierarchy.bodyLarge,
-//                   fontWeight: FontWeight.w400,
-//                   textAlign: TextAlign.center,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:flutter_robin_karp_algorithm_app/controller/home_controller.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/color_manager.dart';
@@ -88,7 +5,7 @@ import 'package:flutter_robin_karp_algorithm_app/resources/text_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/unit_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/finite_state.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/naive_base_algorithm.dart';
-import 'package:flutter_robin_karp_algorithm_app/utils/rabin_karp_compare_algo.dart';
+import 'package:flutter_robin_karp_algorithm_app/utils/rabin_karp_algorithm.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/size_config.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/spacer.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/text_hierarchy.dart';
@@ -100,14 +17,14 @@ import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text_box.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/widgets/my_text_field.dart';
 import 'package:provider/provider.dart';
 
-class AboutScreen extends StatefulWidget {
-  const AboutScreen({super.key});
+class StringMatching extends StatefulWidget {
+  const StringMatching({super.key});
 
   @override
-  State<AboutScreen> createState() => _AboutScreenState();
+  State<StringMatching> createState() => _StringMatchingState();
 }
 
-class _AboutScreenState extends State<AboutScreen> {
+class _StringMatchingState extends State<StringMatching> {
   late final HomeController _provider;
   final TextEditingController _testerController = TextEditingController();
   final TextEditingController _conversionController = TextEditingController();
@@ -167,59 +84,66 @@ class _AboutScreenState extends State<AboutScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    const MyText(
-                      text: TextManager.HOME_CAPTION,
-                      color: ColorManager.BLACK,
-                      textHierarchy: TextHierarchy.bodySmall,
-                      fontWeight: FontWeight.w400,
-                      textAlign: TextAlign.center,
-                    ),
-                    40.0.vSpace,
-                    MyButton(
-                      isPrimaryButton: true,
-                      isCropButton: false,
-                      isCompare: false,
-                      needElevation: true,
-                      width: getProportionateScreenWidth(317.0),
-                      height: getProportionateScreenHeight(72.0),
-                      borderRadius: UnitManager.RADIUS_MEDIUM,
-                      text: TextManager.HOME_TAKE_PICTURE_BUTTON,
-                      color: ColorManager.BLACK,
-                      textHierarchy: TextHierarchy.bodySmall,
-                      fontWeight: FontWeight.w500,
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CameraScreen(),
-                        ),
-                      ),
-                    ),
+                    // const MyText(
+                    //   text: TextManager.HOME_CAPTION,
+                    //   color: ColorManager.BLACK,
+                    //   textHierarchy: TextHierarchy.bodySmall,
+                    //   fontWeight: FontWeight.w400,
+                    //   textAlign: TextAlign.center,
+                    // ),
+                    // 40.0.vSpace,
+                    // MyButton(
+                    //   isPrimaryButton: true,
+                    //   isCropButton: false,
+                    //   isCompare: false,
+                    //   needElevation: true,
+                    //   width: getProportionateScreenWidth(317.0),
+                    //   height: getProportionateScreenHeight(72.0),
+                    //   borderRadius: UnitManager.RADIUS_MEDIUM,
+                    //   text: TextManager.HOME_TAKE_PICTURE_BUTTON,
+                    //   color: ColorManager.BLACK,
+                    //   textHierarchy: TextHierarchy.bodySmall,
+                    //   fontWeight: FontWeight.w500,
+                    //   onPressed: () => Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const CameraScreen(),
+                    //     ),
+                    //   ),
+                    // ),
                     23.0.vSpace,
-                    Consumer<HomeController>(
-                      builder: (context, value, child) {
-                        if (value.finiteState == FiniteState.succeed &&
-                            value.convertResult != null) {
-                          return MyTextBox(
-                            title: TextManager.CONVERT_TEXT_BOX_TITLE,
-                            text: value.convertResult!.text!,
-                            color: ColorManager.BLACK,
-                          );
-                        } else {
-                          return MyTextField(
-                            title: TextManager.CONVERT_TEXT_BOX_TITLE,
-                            hint: TextManager.CONVERT_TEXT_BOX_HINT,
-                            controller:
-                                _conversionController, // Text controller for user input
-                            currentFocus: _conversionNode,
-                          );
-                        }
-                      },
+                    // Consumer<HomeController>(
+                    //   builder: (context, value, child) {
+                    //     if (value.finiteState == FiniteState.succeed &&
+                    //         value.convertResult != null) {
+                    //       return MyTextBox(
+                    //         title: TextManager.SAMPLE_TEXT,
+                    //         text: value.convertResult!.text!,
+                    //         color: ColorManager.BLACK,
+                    //       );
+                    //     } else {
+                    //       return MyTextField(
+                    //         title: TextManager.SAMPLE_TEXT,
+                    //         hint: TextManager.CONVERT_TEXT_BOX_HINT,
+                    //         controller:
+                    //             _conversionController, // Text controller for user input
+                    //         currentFocus: _conversionNode,
+                    //       );
+                    //     }
+                    //   },
+                    // ),
+                    MyTextField(
+                      title: TextManager.SAMPLE_TEXT,
+                      hint: TextManager.CONVERT_TEXT_BOX_HINT,
+                      controller:
+                          _conversionController, // Text controller for user input
+                      currentFocus: _conversionNode,
                     ),
                     21.0.vSpace,
                     Form(
                       key: _formKey,
                       child: MyTextField(
-                        title: TextManager.TESTER_TEXT_BOX_TITLE,
+                        title: TextManager.SAMPLE_PATTERN,
                         hint: TextManager.TESTER_TEXT_BOX_HINT,
                         controller: _testerController,
                         currentFocus: _testerNode,
@@ -269,14 +193,15 @@ class _AboutScreenState extends State<AboutScreen> {
                                     ),
                                   );
                                 } else {
-                                  String textToSearchIn = _provider
-                                              .convertResult
-                                              ?.text
-                                              ?.isNotEmpty ==
-                                          true
-                                      ? _provider.convertResult!.text!
-                                      : _conversionController.text;
-
+                                  // String textToSearchIn = _provider
+                                  //             .convertResult
+                                  //             ?.text
+                                  //             ?.isNotEmpty ==
+                                  //         true
+                                  //     ? _provider.convertResult!.text!
+                                  //     : _conversionController.text;
+                                  String textToSearchIn =
+                                      _conversionController.text;
                                   Map<String, dynamic> result =
                                       StringMatchingAlgorithm.stringMatching(
                                           textToSearchIn,
@@ -285,7 +210,6 @@ class _AboutScreenState extends State<AboutScreen> {
                                   String resultText = result["matchedIndices"]
                                           .isNotEmpty
                                       ? 'Pattern found at positions: ${result["matchedIndices"].join(', ')}\n'
-                                          'Execution Time: ${result["executionTimeMs"]} ms\n'
                                           'Comparisons: ${result["comparisons"]}'
                                       : 'No match found';
 
@@ -318,7 +242,7 @@ class _AboutScreenState extends State<AboutScreen> {
                                               ),
                                               13.0.vSpace,
                                               const MyText(
-                                                text: 'Accuracy of Result',
+                                                text: 'Result',
                                                 color: ColorManager.BLACK,
                                                 textHierarchy:
                                                     TextHierarchy.display,
@@ -396,13 +320,15 @@ class _AboutScreenState extends State<AboutScreen> {
                                     ),
                                   );
                                 } else {
-                                  String textToSearchIn = _provider
-                                              .convertResult
-                                              ?.text
-                                              ?.isNotEmpty ==
-                                          true
-                                      ? _provider.convertResult!.text!
-                                      : _conversionController.text;
+                                  // String textToSearchIn = _provider
+                                  //             .convertResult
+                                  //             ?.text
+                                  //             ?.isNotEmpty ==
+                                  //         true
+                                  //     ? _provider.convertResult!.text!
+                                  //     : _conversionController.text;
+                                  String textToSearchIn =
+                                      _conversionController.text;
 
                                   // Map<String, dynamic> result =
                                   // StringMatchingAlgorithm.stringMatching(
@@ -419,13 +345,12 @@ class _AboutScreenState extends State<AboutScreen> {
                                       StringMatchingRabinKarpAlgo.rabinKarp(
                                           textToSearchIn,
                                           _testerController.text,
-                                          101 // Prime number for hashing
+                                          1000000007 // Prime number for hashing
                                           );
 
                                   String resultText = result["matchedIndices"]
                                           .isNotEmpty
                                       ? 'Pattern found at positions: ${result["matchedIndices"].join(', ')}\n'
-                                          'Execution Time: ${result["executionTimeMs"]} ms\n'
                                           'Comparisons: ${result["comparisons"]}'
                                       : 'No match found';
 
@@ -458,7 +383,7 @@ class _AboutScreenState extends State<AboutScreen> {
                                               ),
                                               13.0.vSpace,
                                               const MyText(
-                                                text: 'Accuracy of Result',
+                                                text: 'Result',
                                                 color: ColorManager.BLACK,
                                                 textHierarchy:
                                                     TextHierarchy.display,

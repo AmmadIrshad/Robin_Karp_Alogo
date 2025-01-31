@@ -67,7 +67,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
             ),
             color: ColorManager.SECONDARY_COLOR,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               //spacing: getProportionateScreenWidth(42.73),
               children: <Widget>[

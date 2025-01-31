@@ -3,7 +3,8 @@ import 'package:flutter_robin_karp_algorithm_app/resources/color_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/text_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/unit_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/size_config.dart';
-import 'package:flutter_robin_karp_algorithm_app/view/about/about_screen.dart';
+import 'package:flutter_robin_karp_algorithm_app/view/about/about.dart';
+import 'package:flutter_robin_karp_algorithm_app/view/string_matching/string_matching.dart';
 import 'package:flutter_robin_karp_algorithm_app/view/home/home_screen.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -54,8 +55,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             label: TextManager.HOME_NAV_BAR_LABEL,
           ),
           const BottomNavigationBarItem(
+            icon: Icon(Icons.compare),
+            label: TextManager.RK_NAV_BAR_LABEL,
+          ),
+          const BottomNavigationBarItem(
             icon: Icon(Icons.feedback),
-            label: TextManager.ABOUT_NAV_BAR_LABEL,
+            label: TextManager.About_NAV_BAR_LABEL,
           ),
         ],
         onTap: (value) {
@@ -72,6 +77,17 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                 (route) => false,
               );
             } else if (value == 1) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const StringMatching(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
+                (route) => false,
+              );
+            } else if (value == 2) {
               Navigator.pushAndRemoveUntil(
                 context,
                 PageRouteBuilder(

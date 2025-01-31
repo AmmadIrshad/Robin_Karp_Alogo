@@ -4,7 +4,7 @@ import 'package:flutter_robin_karp_algorithm_app/resources/color_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/text_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/resources/unit_manager.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/finite_state.dart';
-import 'package:flutter_robin_karp_algorithm_app/utils/robin_karp_algorithm.dart';
+import 'package:flutter_robin_karp_algorithm_app/utils/robin_karp_comparison.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/size_config.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/spacer.dart';
 import 'package:flutter_robin_karp_algorithm_app/utils/text_hierarchy.dart';
