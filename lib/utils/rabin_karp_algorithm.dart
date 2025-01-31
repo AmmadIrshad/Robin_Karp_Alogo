@@ -11,9 +11,6 @@ class StringMatchingRabinKarpAlgo {
     int comparisons = 0; // Count of character comparisons
     List<int> s = []; // Store matching indices
 
-    // Start time for execution measurement
-    int startTime = DateTime.now().millisecondsSinceEpoch;
-
     // Precompute h = d^(m-1) % prime
     for (int i = 0; i < m - 1; i++) {
       h = (h * d) % prime;
@@ -52,15 +49,6 @@ class StringMatchingRabinKarpAlgo {
       }
     }
 
-    // End time for execution measurement
-    int endTime = DateTime.now().millisecondsSinceEpoch;
-    int executionTime =
-        endTime - startTime; // Calculate execution time in milliseconds
-
-    return {
-      "matchedIndices": s,
-      "executionTimeMs": executionTime,
-      "comparisons": comparisons
-    };
+    return {"matchedIndices": s, "comparisons": comparisons};
   }
 }
