@@ -112,7 +112,7 @@ class _MyTextFieldState extends State<MyTextField> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Teks penguji wajib diisi';
+                  return 'The text is required.';
                 }
                 return null;
               },

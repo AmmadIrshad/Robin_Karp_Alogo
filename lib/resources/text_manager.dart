@@ -4,9 +4,13 @@ class TextManager {
   static const String HOME_CAPTION =
       'Take a picture containing text objects to perform image-to-text conversion.';
   static const String HOME_TAKE_PICTURE_BUTTON = 'Take Picture';
-  static const String HOME_COMPARE_BUTTON = 'Compare';
+  static const String HOME_COMPARE_BUTTON_RABIN_KARP = 'Compare with RK';
+  static const String HOME_COMPARE_BUTTON = 'Calcute accuraccy';
+  static const String HOME_COMPARE_BUTTON_NAIVE_BASE = 'Compare with NB';
   static const String HOME_EXPLANATION =
       'Compare the converted text with the tester text to see the conversion accuracy.';
+  static const String HOME_EXPLANATION_RK_NB =
+      'Compare the converted text with the tester text to see the pattern, execution time and Comparisons.';
   static const String CONVERT_TEXT_BOX_TITLE = 'Conversion Result';
   static const String TESTER_TEXT_BOX_TITLE = 'Tester Text';
   static const String CONVERT_TEXT_BOX_HINT =
@@ -26,8 +30,8 @@ class TextManager {
       'Ammad Irshad & Hashir Saud & Muhammad Farhan';
 
   //for bottom navigation bar
-  static const String HOME_NAV_BAR_LABEL = 'Home';
-  static const String ABOUT_NAV_BAR_LABEL = 'About';
+  static const String HOME_NAV_BAR_LABEL = 'RK accuracy';
+  static const String ABOUT_NAV_BAR_LABEL = 'RK & NB ';
 
   //for preview screen
   static const String CROP_BUTTON = 'Crop';
